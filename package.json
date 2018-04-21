@@ -1,0 +1,24 @@
+{
+  "name": "calorie-count-cuse-hacks",
+  "version": "1.0.0",
+  "description": "Identify food from image and get its calories.",
+  "main": "index.js",
+  "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node index.js",
+      "deploy": "gcloud app deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuyuMk7/calorie-count-cuse-hacks.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wuyuMk7/calorie-count-cuse-hacks/issues"
+  },
+  "homepage": "https://github.com/wuyuMk7/calorie-count-cuse-hacks#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
