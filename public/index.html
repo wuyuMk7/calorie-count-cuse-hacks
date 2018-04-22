@@ -1,9 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" >
 
 <head>
   <meta charset="UTF-8">
   <title>Login Page</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
 body {
     margin: 0;
@@ -150,10 +152,46 @@ body {
 		</div>
 		<br>
 		<div class="login">
-				<input type="text" placeholder="username" name="user"><br>
-				<input type="password" placeholder="password" name="password"><br>
-				<input type="button" value="Login">
+        <form>
+				<input type="text" placeholder="username" name="user" id="username"><br>
+				<input type="password" placeholder="password" name="password" id="password"><br>
+				<input type="button" value="Login" id="btnSubmit">
+        </form>
 		</div>
+
+    <script type="text/javascript">
+     $(document).ready(function () {
+         $('#btnSubmit').click(function(event) {
+             event.preventDefault();
+
+             var username = $('#username').val();
+             var password = $('#password').val();
+
+             if (username == undefined ||
+                 password == undefined ||
+                 username == '' ||
+                 password == '')
+                 return false;
+
+             axios.post('/login', {
+                 username: username,
+                 password: password
+             }).then((resp) => {
+                 if (resp.status == 403) {
+                     console.log('Invalid username or password');
+                 } else {
+                     if (resp.data.status == 'success') {
+                         console.log('Success!');
+                         window.location = resp.data.url;
+                     }
+                 }
+             }).catch((err) => {
+                 console.log(err);
+             });
+         });
+     });
+
+    </script>
 </body>
 
 </html>

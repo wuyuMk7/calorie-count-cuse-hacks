@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>User Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+          var chart = new CanvasJS.Chart("chartContainer",
+          {
+            title:{
+              text: "Olympic Medals of all Times (till 2012 Olympics)"
+            },
+            data: [
+            {
+              type: "bar",
+              dataPoints: [
+              { y: 198, label: "Italy"},
+              { y: 201, label: "China"},
+              { y: 202, label: "France"},
+              { y: 236, label: "Great Britain"},
+              { y: 395, label: "Soviet Union"},
+              { y: 957, label: "USA"}
+              ]
+            },
+            {
+              type: "bar",
+              dataPoints: [
+              { y: 166, label: "Italy"},
+              { y: 144, label: "China"},
+              { y: 223, label: "France"},
+              { y: 272, label: "Great Britain"},
+              { y: 319, label: "Soviet Union"},
+              { y: 759, label: "USA"}
+              ]
+            },
+            ]
+          });
+      
+      chart.render();
+      }
+      </script>
+      <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+      <style>
+body{
+    margin:0;
+    z-index:0;
+    background-image:url("https://static.wixstatic.com/media/56adecff887f459297d81ee5a451ca0e.png/v1/fill/w_200,h_200,al_c/56adecff887f459297d81ee5a451ca0e.png")
+}
+
+.UserProfile{
+    z-index:1;
+
+    position:absolute;
+    right:20px;
+    top:20px;
+    width:calc(30%);
+    height:calc(40%);
+
+    border-style:dashed;
+    border-radius:10px;
+
+    overflow:hidden;
+    background-color:rgba(206, 236, 245, 1)
+}
+
+.UserProfile img{
+    z-index:2;
+
+    display:block;
+    margin-top:30px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:30px;
+
+    border-style:solid;
+    border-radius:50%;
+    height:100px;
+}
+
+.UserProfile #name{
+    z-index:2;
+
+    border-style:solid;
+    text-align:center;
+    font-size:30px;
+    margin-left:auto;
+    margin-right:auto;
+    width:90%;
+    border-radius:30px;
+    height:40px;
+    margin-bottom:20px;
+}
+
+.UserProfile input{
+    z-index:2;
+
+    display:block;
+    margin:auto;
+    height:40px;
+    width:90%;
+    font-size:22px;
+    text-align:center;
+    border-radius:30px;
+}
+    
+.Upload{
+    z-index:1;
+
+    position:absolute;
+    right:20px;
+    bottom:20px;
+    width:calc(30%);
+    height:calc(50%);
+
+    border-style:dashed;
+    border-radius:10px;
+
+    overflow:hidden;
+    background-color:rgba(151, 222, 255, 1)
+}
+
+.Upload #upload{
+    z-index:2;
+
+    display:block;
+    font-size:30px;
+    text-align:center;
+    margin-top:20px;
+}
+
+.Upload input{
+    z-index:2;
+
+    display:block;
+    margin-bottom:auto;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:20px;
+    position:relative;
+
+}
+
+.pi{
+    z-index:1;
+
+    position:absolute;
+    left:20px;
+    top:20px;
+    width:calc(65%);
+    height:calc(40%);
+
+    border-style:dashed;
+    border-radius:10px;
+
+    overflow:hidden;
+    background-color:rgb(184, 207, 120);
+}
+
+.Board{
+    z-index:1;
+
+    position:absolute;
+    left:20px;
+    bottom:20px;
+    width:calc(65%);
+    height:calc(50%);
+
+    border-style:dashed;
+    border-radius:10px;
+
+    overflow:hidden;
+    background-color:rgba(170, 231, 192, 1);
+}
+
+    </style>
+</head>
+<body>
+    <div>
+        <!--用户信息-->
+        <div class="UserProfile">
+            <img src="https://static.wixstatic.com/media/035244_fd9047684abb4f6ab91b89a9a967a80a~mv2.png/v1/fill/w_188,h_188,al_c,usm_0.66_1.00_0.01/035244_fd9047684abb4f6ab91b89a9a967a80a~mv2.png" alt="UserImage">
+            <div id="name" align="center">User Name</div>
+            <input type="button" value="Sign Out">
+        </div>
+
+        <!--上传图片-->
+        <form action="/upload" method="post" enctype="multipart/form-data">
+
+
+            <div class="Upload">
+                <input type="file" name="food-image" id="upload">
+                <div id="upload">Upload Your Picture!</div>
+                <div>
+                    <!--                    <input type="image" src="https://static.wixstatic.com/media/035244_f65d91d2c6784c938c63ff40b5eb3b14~mv2.png/v1/fill/w_280,h_280,al_c,lg_1/035244_f65d91d2c6784c938c63ff40b5eb3b14~mv2.png" alt="PictureIcon"/> -->
+                </div>
+                <input id="uploadSubmit" type="submit" value="Submit">
+            </div>
+        </form>
+
+        <!--生成扇形图-->
+        <div class="pi">
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!--基本内容-->
+        <div class="Board">
+            <table>
+                <tr>
+                    <td id="choice1"></td>
+                    <td id="choice2"></td>
+                    <td id="add"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+     $(document).ready(function (){
+         /*
+         var data = new FormData();
+         jQuery.each(jQuery('file#upload')[0].files, function(i, file) {
+             data.append('file-'+i, file);
+         });
+         
+
+         $('#uploadSubmit').click(function(event) {
+             event.preventDefault();
+
+             $.ajax({
+                 url: '/upload',
+                 data: data,
+                 cache: false,
+                 //contentType: 'multipart/form-data',
+                 contentType: false,
+                 processData: false,
+                 type: 'POST',
+                     success: function(data){
+                     alert(data);
+                 }
+             });
+
+         });
+*/
+     });
+    </script>
+</body>
+</html>
